@@ -28,10 +28,10 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button 
                 size="lg" 
-                onClick={() => scrollToSection('portfolio')}
+                onClick={() => scrollToSection('about')}
                 className="bg-white text-primary hover:bg-white/90 font-semibold"
               >
-                View My Work
+                About Me
               </Button>
               <Button 
                 size="lg" 

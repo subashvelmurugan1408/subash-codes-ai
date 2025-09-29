@@ -3,8 +3,22 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Linkedin, Github, MapPin, Phone } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
+import { z } from 'zod';
+
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_d7fbl7h';
+const EMAILJS_TEMPLATE_ID = 'template_pf8vq9j';
+const EMAILJS_PUBLIC_KEY = '6kcuM48Xd1Za5o7fB';
+
+// Form validation schema
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
+  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters")
+});
 
 const Contact = () => {
   const { toast } = useToast();
@@ -13,35 +27,83 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
     
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Please fill in all fields",
-        description: "All fields are required to send a message.",
-        variant: "destructive"
-      });
-      return;
+    // Validate form data
+    try {
+      contactSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors: Record<string, string> = {};
+        error.issues.forEach((issue) => {
+          if (issue.path[0]) {
+            fieldErrors[issue.path[0] as string] = issue.message;
+          }
+        });
+        setErrors(fieldErrors);
+        toast({
+          title: "Please fix the errors",
+          description: "Check the form fields for validation errors.",
+          variant: "destructive"
+        });
+        return;
+      }
     }
 
-    // Simulate form submission
-    toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Subash V',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again later or contact me directly via email.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   return (
@@ -138,8 +200,9 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your full name"
-                  className="w-full"
+                  className={`w-full ${errors.name ? 'border-red-500' : ''}`}
                 />
+                {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
               </div>
               
               <div>
@@ -153,8 +216,9 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="your.email@example.com"
-                  className="w-full"
+                  className={`w-full ${errors.email ? 'border-red-500' : ''}`}
                 />
+                {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
               </div>
               
               <div>
@@ -168,16 +232,25 @@ const Contact = () => {
                   onChange={handleChange}
                   placeholder="Tell me about your project or idea..."
                   rows={6}
-                  className="w-full"
+                  className={`w-full ${errors.message ? 'border-red-500' : ''}`}
                 />
+                {errors.message && <p className="text-sm text-red-500 mt-1">{errors.message}</p>}
               </div>
               
               <Button 
                 type="submit" 
                 className="w-full bg-primary hover:bg-primary-dark"
                 size="lg"
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </form>
           </Card>

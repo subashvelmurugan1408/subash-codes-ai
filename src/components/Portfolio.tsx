@@ -69,7 +69,7 @@ const Portfolio = () => {
         "Order placement flow",
         "Responsive mobile-first design",
       ],
-      technologies: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      technologies: ["HTML", "CSS", "JavaScript", "MySQL", "Python", "AWS RDS (Cloud)"],
       status: "Live",
       featured: false,
       icon: UtensilsCrossed,

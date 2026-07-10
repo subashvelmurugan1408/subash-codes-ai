@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Brain, Stethoscope, ShieldCheck } from 'lucide-react';
+import { ExternalLink, Github, Brain, Stethoscope, ShieldCheck, UtensilsCrossed } from 'lucide-react';
 
 const Portfolio = () => {
   const projects = [
@@ -57,6 +57,24 @@ const Portfolio = () => {
       icon: ShieldCheck,
       githubUrl: "https://github.com/subashvelmurugan1408",
       demoUrl: "",
+    },
+    {
+      title: "Food Ordering Web",
+      type: "Full-Stack Web Application",
+      description:
+        "A modern food ordering platform where users can browse menus, add items to cart, and place orders through a clean, responsive web interface.",
+      features: [
+        "Browse food menu by category",
+        "Add to cart and manage quantities",
+        "Order placement flow",
+        "Responsive mobile-first design",
+      ],
+      technologies: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+      status: "Live",
+      featured: false,
+      icon: UtensilsCrossed,
+      githubUrl: "https://github.com/subashvelmurugan1408",
+      demoUrl: "https://food-ordering-web-1.onrender.com",
     },
   ];
 

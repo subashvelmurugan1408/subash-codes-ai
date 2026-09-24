@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, Menu, X, MoveUpRight, Code2, BrainCircuit, Database, Layers3, ShieldCheck, UtensilsCrossed, Stethoscope } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail, Menu, X, MoveUpRight, Code2, BrainCircuit, Database, Layers3, ShieldCheck, UtensilsCrossed, Stethoscope, Mic, MessagesSquare, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Contact from '@/components/Contact';
 import portrait from '@/assets/subash-profile.jpg';
@@ -42,6 +42,33 @@ const projects = [
     result: 'A completed authentication system covering the core account lifecycle.',
     tools: ['React', 'Node.js', 'JWT'], icon: ShieldCheck,
     link: '',
+  },
+  {
+    number: '05', title: 'Elisa Study Chatbot', category: 'AI / VOICE INTERFACE', status: 'LIVE',
+    summary: 'A study assistant you can talk to — and that talks back.',
+    problem: 'Students often learn better by asking questions out loud and hearing explanations, not just reading them.',
+    approach: 'Built a Next.js and TypeScript chat experience with Web Speech API speech-to-text and text-to-speech voice controls, tailored to subjects like math, science, and history.',
+    result: 'A live voice-enabled study chatbot with message history and a polished, responsive interface.',
+    tools: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Speech API'], icon: Mic,
+    link: 'https://tts-studybot-one.vercel.app',
+  },
+  {
+    number: '06', title: 'RAG Chatbot', category: 'ARTIFICIAL INTELLIGENCE / RETRIEVAL', status: 'LIVE',
+    summary: 'Ask questions about your own documents and get grounded answers.',
+    problem: 'Generic chatbots answer from memory; real questions often live inside specific documents.',
+    approach: 'Combined a Next.js frontend with a Flask RAG backend — Hugging Face embeddings, ChromaDB vector search, and an LLM — packaged into a single Docker container.',
+    result: 'A live document question-answering chatbot deployed on Render, ready for cloud deployment.',
+    tools: ['Next.js', 'Flask', 'ChromaDB', 'Hugging Face', 'Docker'], icon: MessagesSquare,
+    link: 'https://rag-chatbot-ost8.onrender.com',
+  },
+  {
+    number: '07', title: "BLAST'26 Event Site", category: 'WEB DESIGN / EVENTS', status: 'LIVE',
+    summary: 'The official landing page for a flagship technical event.',
+    problem: 'A technical fest needs a site that excites participants while keeping schedules and details easy to find.',
+    approach: 'Designed an immersive, animated landing page with React and Vite — interactive hero, event schedule, and competition highlights.',
+    result: 'A live, mobile-friendly event site with smooth animations and fast loading, deployed on Vercel.',
+    tools: ['React', 'Vite', 'JavaScript', 'CSS', 'Vercel'], icon: Rocket,
+    link: 'https://blast-26-landing-page.vercel.app',
   },
 ];
 
@@ -110,7 +137,7 @@ const Index = () => {
         <div className="section-heading reveal"><span className="section-number">01 / INTRODUCTION</span><span className="section-rule" /></div>
         <div className="intro-grid">
           <div className="intro-aside reveal">DEVELOPER.<br/>BUILDER.<br/><span>CURIOUS MIND.</span></div>
-          <div className="intro-main reveal"><h2>I BUILD FOR<br/><span className="accent-text">WHAT'S NEXT.</span></h2><p>I'm Subash V, a B.Tech Computer Science student at RVS Technical Campus, Coimbatore. I work across software development and AI — turning ideas into useful, considered digital experiences.</p><div className="intro-facts"><div><strong>2028</strong><span>EXPECTED GRADUATION</span></div><div><strong>04</strong><span>SELECTED PROJECTS</span></div></div></div>
+          <div className="intro-main reveal"><h2>I BUILD FOR<br/><span className="accent-text">WHAT'S NEXT.</span></h2><p>I'm Subash V, a B.Tech Computer Science student at RVS Technical Campus, Coimbatore. I work across software development and AI — turning ideas into useful, considered digital experiences.</p><div className="intro-facts"><div><strong>2028</strong><span>EXPECTED GRADUATION</span></div><div><strong>07</strong><span>SELECTED PROJECTS</span></div></div></div>
         </div>
       </section>
 

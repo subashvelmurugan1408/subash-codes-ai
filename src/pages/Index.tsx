@@ -137,7 +137,7 @@ const Index = () => {
         <div className="section-heading reveal"><span className="section-number">01 / INTRODUCTION</span><span className="section-rule" /></div>
         <div className="intro-grid">
           <div className="intro-aside reveal">DEVELOPER.<br/>BUILDER.<br/><span>CURIOUS MIND.</span></div>
-          <div className="intro-main reveal"><h2>I BUILD FOR<br/><span className="accent-text">WHAT'S NEXT.</span></h2><p>I'm Subash V, a B.Tech Computer Science student at RVS Technical Campus, Coimbatore. I work across software development and AI — turning ideas into useful, considered digital experiences.</p><div className="intro-facts"><div><strong>2028</strong><span>EXPECTED GRADUATION</span></div><div><strong>04</strong><span>SELECTED PROJECTS</span></div></div></div>
+          <div className="intro-main reveal"><h2>I BUILD FOR<br/><span className="accent-text">WHAT'S NEXT.</span></h2><p>I'm Subash V, a B.Tech Computer Science student at RVS Technical Campus, Coimbatore. I work across software development and AI — turning ideas into useful, considered digital experiences.</p><div className="intro-facts"><div><strong>2028</strong><span>EXPECTED GRADUATION</span></div><div><strong>07</strong><span>SELECTED PROJECTS</span></div></div></div>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { ArrowUpRight, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,11 +19,9 @@ const Contact = () => {
   const [website, setWebsite] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const mountedAt = useRef(Date.now());
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (website || Date.now() - mountedAt.current < 2500) return;
+    if (website) return;
     const validation = contactSchema.safeParse(formData);
     if (!validation.success) {
       const next: Record<string, string> = {};
@@ -38,7 +36,6 @@ const Contact = () => {
         from_name: validation.data.name, from_email: validation.data.email, message: validation.data.message, to_name: 'Subash V',
       }, '6kcuM48Xd1Za5o7fB');
       setFormData({ name: '', email: '', message: '' });
-      mountedAt.current = Date.now();
       toast({ title: 'Message sent', description: "Thanks for reaching out. I'll get back to you soon." });
     } catch {
       toast({ title: 'Message not sent', description: 'Please try again or email me directly.', variant: 'destructive' });

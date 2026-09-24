@@ -89,7 +89,7 @@ const Index = () => {
 
     <main>
       <section className="hero" id="home">
-        <div className="hero-portrait"><img src={portrait} alt="Portrait of Subash V" fetchPriority="high" /></div>
+        <div className="hero-portrait"><img src={portrait} alt="Portrait of Subash V" /></div>
         <div className="hero-shade" />
         <div className="hero-grain" />
         <div className="hero-inner">

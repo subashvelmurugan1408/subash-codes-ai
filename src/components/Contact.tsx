@@ -33,7 +33,7 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       await emailjs.send('service_d7fbl7h', 'template_pf8vq9j', {
-        from_name: validation.data.name, from_email: validation.data.email, message: validation.data.message, to_name: 'Subash V',
+        from_name: validation.data.name, from_email: validation.data.email, reply_to: validation.data.email, message: validation.data.message, to_name: 'Subash V', to_email: 'subashvelmurugan8@gmail.com', email: 'subashvelmurugan8@gmail.com',
       }, '6kcuM48Xd1Za5o7fB');
       setFormData({ name: '', email: '', message: '' });
       toast({ title: 'Message sent', description: "Thanks for reaching out. I'll get back to you soon." });
